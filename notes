@@ -1,0 +1,29 @@
+- Remove style tag
+- Validate HTML
+- Fix CSS indent
+- Remove style attribute
+- Remove global variables e.g. map, markers
+- Remove script tags with content
+- Wrap JavaScript code in an IIFE
+- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+- Call at most a function in a line
+- Define var at most once in a function
+- Be consistent in using whether native JavaScript api or jQuery
+- Fix indentation of the callback
+- Lint JavaScript with JSHint
+- Add whitespace around '>' operator
+- Fix casing of variables, e.g. TextArr
+- Remove var in a for clause, scope in JavaScript is function scope
+- Declare LatLng
+- Remove console.log
+- Sort function in alphabets
+- Create geocoder at most once
+- Create callback for geocoder at most once
+- Make coding style conforming to Idiomatic.js
+- Include jQuery locally
+- Put script tags right before the closing tag of body
+- Show more than 11 addresses at a time
+- onGeocodeGet
+- callback
+- browser cache e.g. jquery
+- jQuery(onLoad);
