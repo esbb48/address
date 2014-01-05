@@ -1,6 +1,8 @@
 (function () {
-  var map,
+  var geocoder,
+      map,
       markers = [];
+      geocoder = new google.maps.Geocoder();
 
   function addMarker(location, title) {
     var marker;
@@ -10,6 +12,21 @@
       title: title
     });
     markers.push(marker);
+  }
+
+  function goLoop(TextArr, i){
+    i--;
+    if(i < 0) {
+
+    } else if(TextArr[i].length <= 0){
+      goLoop(TextArr, i);
+    } else{
+      geocoder.geocode(
+        {'address':TextArr[i]},
+        onGeocodeGet
+      );
+      setTimeout(function(){ goLoop(TextArr, i) }, 1000);
+    }
   }
 
   function initialize() {
@@ -26,28 +43,15 @@
     map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
     $("#address").on('change',function(){
-      var geocoder,
-          i,
+      var i,
           LatLng,
           str,
           TextArr;
 
-      geocoder = new google.maps.Geocoder();
-      str = $(this).val();
+      str = $("#address").val();
       TextArr = str.split('\n');
-
-      for (i = TextArr.length - 1; i >= 0; i--) {
-
-        if(TextArr[i].length <= 0){
-          continue;
-        }
-
-        geocoder.geocode(
-          {'address':TextArr[i]},
-          onGeocodeGet
-        );
-
-      };
+      i = TextArr.length;
+      goLoop(TextArr, i);
     });
   }
 
@@ -66,17 +70,20 @@
     }
   }
 
-  $('#delete').on('click',function() {
-    $('#hide').click();
-    markers = [];
-  });
+  $(function(){
 
-  $('#hide').on('click',function() {
-    setAllMap(null);
-  });
+    $('#delete').on('click', function() {
+      $('#hide').click();
+      markers = [];
+    });
 
-  $('#show').on('click',function() {
-    setAllMap(map);
+    $('#hide').on('click', function() {
+      setAllMap(null);
+    });
+
+    $('#show').on('click', function() {
+      setAllMap(map);
+    });
   });
 
   google.maps.event.addDomListener(window, 'load', initialize);
