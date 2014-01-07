@@ -27,3 +27,9 @@
 - callback
 - browser cache e.g. jquery
 - jQuery(onLoad);
+- Use 0 without unit in css. e.g. margin: 0; instead of margin: 0px;
+- Create a folder, jquery, under vendor for jQuery
+- Use "use strict" in JavaScript
+- Have a white space before the opening bracelet of function.
+	e.g. function () {} instead of function(){}
+- Put function body in a new line
