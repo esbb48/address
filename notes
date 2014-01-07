@@ -1,35 +1,41 @@
-- Remove style tag
-- Validate HTML
-- Fix CSS indent
-- Remove style attribute
-- Remove global variables e.g. map, markers
-- Remove script tags with content
-- Wrap JavaScript code in an IIFE
-- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
-- Call at most a function in a line
-- Define var at most once in a function
-- Be consistent in using whether native JavaScript api or jQuery
-- Fix indentation of the callback
-- Lint JavaScript with JSHint
-- Add whitespace around '>' operator
-- Fix casing of variables, e.g. TextArr
-- Remove var in a for clause, scope in JavaScript is function scope
-- Declare LatLng
-- Remove console.log
-- Sort function in alphabets
-- Create geocoder at most once
-- Create callback for geocoder at most once
-- Make coding style conforming to Idiomatic.js
-- Include jQuery locally
-- Put script tags right before the closing tag of body
-- Show more than 11 addresses at a time
-- onGeocodeGet
-- callback
-- browser cache e.g. jquery
-- jQuery(onLoad);
-- Use 0 without unit in css. e.g. margin: 0; instead of margin: 0px;
-- Create a folder, jquery, under vendor for jQuery
-- Use "use strict" in JavaScript
-- Have a white space before the opening bracelet of function.
+O- Remove style tag
+@- Validate HTML (是驗證哪一種呢?)
+    目前丟檔案剩下這種錯誤, 可是這段式=  ' ' = 我用驗證片段br時產生的耶...
+    Error Line 6, Column 61: Bad value Content-Style-Type for attribute http-equiv on element meta.
+    <meta http-equiv="Content-Style-Type" content="text/css">
+O- Fix CSS indent
+O- Remove style attribute
+O- Remove global variables e.g. map, markers
+O- Remove script tags with content
+O- Wrap JavaScript code in an IIFE
+O- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+?- Call at most a function in a line ((是指??))
+O- Define var at most once in a function
+O- Be consistent in using whether native JavaScript api or jQuery (一開始load實體化的部分?)
+?- Fix indentation of the callback  ((是指?? --- 完全忘記callback是甚麼ˊ ==))
+X- Lint JavaScript with JSHint (還要再研究= ' =',怎麼結合sublime)
+O- Add whitespace around '>' operator
+O- Fix casing of variables, e.g. TextArr
+O- Remove var in a for clause, scope in JavaScript is function scope
+O- Declare LatLng
+O- Remove console.log
+O- Sort function in alphabets (監聽事件和function的sort一樣混著排序嗎?)
+O- Create geocoder at most once
+NS- Create callback for geocoder at most once (不確定)
+NS- Make coding style conforming to Idiomatic.js (不確定)
+O- Include jQuery locally (可是之前folio你說的判斷網頁有沒有仔入的那個判斷...是忘記了= ' =')
+O- Put script tags right before the closing tag of body
+O- Show more than 11 addresses at a time
+O- onGeocodeGet
+-----------------------------------------------------------------------
+這段都忘記了 T______________T。好像是概念,有要修改嗎...
+- callback ???
+- browser cache e.g. jquery ???
+- jQuery(onLoad); ???
+-----------------------------------------------------------------------
+O- Use 0 without unit in css. e.g. margin: 0; instead of margin: 0px;
+O- Create a folder, jquery, under vendor for jQuery
+O- Use "use strict" in JavaScript
+O- Have a white space before the opening bracelet of function.
 	e.g. function () {} instead of function(){}
-- Put function body in a new line
+O- Put function body in a new line

@@ -1,3 +1,4 @@
+"use strict";
 (function () {
   var geocoder,
       map,
@@ -25,7 +26,11 @@
         {'address':TextArr[i]},
         onGeocodeGet
       );
-      setTimeout(function(){ goLoop(TextArr, i) }, 1000);
+
+      setTimeout(function () {
+        goLoop(TextArr, i)
+      }, 1000);
+
     }
   }
 
@@ -42,9 +47,8 @@
     };
     map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-    $("#address").on('change',function(){
+    $("#address").on('change',function () {
       var i,
-          LatLng,
           str,
           TextArr;
 
@@ -56,6 +60,7 @@
   }
 
   function onGeocodeGet(results, status) {
+    var LatLng;
     if(status == google.maps.GeocoderStatus.OK) {
       LatLng = results[0].geometry.location;
       map.setCenter(LatLng);  //將地圖中心定位到查詢結果
@@ -70,20 +75,17 @@
     }
   }
 
-  $(function(){
+  $('#delete').on('click', function () {
+    $('#hide').click();
+    markers = [];
+  });
 
-    $('#delete').on('click', function() {
-      $('#hide').click();
-      markers = [];
-    });
+  $('#hide').on('click', function () {
+    setAllMap(null);
+  });
 
-    $('#hide').on('click', function() {
-      setAllMap(null);
-    });
-
-    $('#show').on('click', function() {
-      setAllMap(map);
-    });
+  $('#show').on('click', function () {
+    setAllMap(map);
   });
 
   google.maps.event.addDomListener(window, 'load', initialize);
