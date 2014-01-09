@@ -43,3 +43,9 @@ O- Show more than 11 addresses at a time
 O- Create a folder, jquery, under vendor for jQuery
 
 O- Use "use strict" in JavaScript
+
+Use single quote instead of double quote.
+
+Insert a space between if and (. e.g. if (a) instead of if(a)
+
+Insert a space between else and {. e.g. else { instead of else{
