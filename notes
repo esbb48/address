@@ -1,41 +1,45 @@
-O- Remove style tag
 @- Validate HTML (是驗證哪一種呢?)
-    目前丟檔案剩下這種錯誤, 可是這段式=  ' ' = 我用驗證片段br時產生的耶...
-    Error Line 6, Column 61: Bad value Content-Style-Type for attribute http-equiv on element meta.
-    <meta http-equiv="Content-Style-Type" content="text/css">
-O- Fix CSS indent
-O- Remove style attribute
-O- Remove global variables e.g. map, markers
-O- Remove script tags with content
-O- Wrap JavaScript code in an IIFE
-O- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+	目前丟檔案剩下這種錯誤, 可是這段式=  ' ' = 我用驗證片段br時產生的耶...
+	Error Line 6, Column 61: Bad value Content-Style-Type for attribute http-equiv on element meta.
+	<meta http-equiv="Content-Style-Type" content="text/css">
+
+X- Remove global variables e.g. map, markers
+
+X- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+
 ?- Call at most a function in a line ((是指??))
-O- Define var at most once in a function
+一行最多一個 function call
+
 O- Be consistent in using whether native JavaScript api or jQuery (一開始load實體化的部分?)
+妳本來是用 getElementById 這可以用 jQuery 做到
+
 ?- Fix indentation of the callback  ((是指?? --- 完全忘記callback是甚麼ˊ ==))
+callback 就是被作為 value 傳遞的 function
+
 X- Lint JavaScript with JSHint (還要再研究= ' =',怎麼結合sublime)
-O- Add whitespace around '>' operator
-O- Fix casing of variables, e.g. TextArr
-O- Remove var in a for clause, scope in JavaScript is function scope
-O- Declare LatLng
-O- Remove console.log
+Use http://www.jshint.com/ first until you integrate jshint to sublime.
+
+X- Fix casing of variables, e.g. TextArr
+
 O- Sort function in alphabets (監聽事件和function的sort一樣混著排序嗎?)
-O- Create geocoder at most once
-NS- Create callback for geocoder at most once (不確定)
+
+O- Create callback for geocoder at most once (不確定)
+You've done it.
+
 NS- Make coding style conforming to Idiomatic.js (不確定)
+Check out this web page: https://github.com/rwaldron/idiomatic.js/. It's just
+like PSR-2.
+
 O- Include jQuery locally (可是之前folio你說的判斷網頁有沒有仔入的那個判斷...是忘記了= ' =')
-O- Put script tags right before the closing tag of body
+Work it out, this can be a challenge for you.
+
 O- Show more than 11 addresses at a time
-O- onGeocodeGet
 -----------------------------------------------------------------------
 這段都忘記了 T______________T。好像是概念,有要修改嗎...
 - callback ???
 - browser cache e.g. jquery ???
 - jQuery(onLoad); ???
 -----------------------------------------------------------------------
-O- Use 0 without unit in css. e.g. margin: 0; instead of margin: 0px;
 O- Create a folder, jquery, under vendor for jQuery
+
 O- Use "use strict" in JavaScript
-O- Have a white space before the opening bracelet of function.
-	e.g. function () {} instead of function(){}
-O- Put function body in a new line
