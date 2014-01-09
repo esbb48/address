@@ -4,11 +4,14 @@
 	<meta http-equiv="Content-Style-Type" content="text/css">
 
 X- Remove global variables e.g. map, markers
+FOLIO TODO: Talk about OOP in JavaScript.
 
 X- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+Make them all uppercase
 
 ?- Call at most a function in a line ((是指??))
 一行最多一個 function call
+FOLIO TODO: demo the problem when using debugger
 
 O- Be consistent in using whether native JavaScript api or jQuery (一開始load實體化的部分?)
 妳本來是用 getElementById 這可以用 jQuery 做到
@@ -34,18 +37,32 @@ O- Include jQuery locally (可是之前folio你說的判斷網頁有沒有仔入
 Work it out, this can be a challenge for you.
 
 O- Show more than 11 addresses at a time
+FOLIO TODO: Talk about deferred.
+
 -----------------------------------------------------------------------
 這段都忘記了 T______________T。好像是概念,有要修改嗎...
 - callback ???
 - browser cache e.g. jquery ???
 - jQuery(onLoad); ???
 -----------------------------------------------------------------------
+
 O- Create a folder, jquery, under vendor for jQuery
+FOLIO TODO: Talk about the reason
 
 O- Use "use strict" in JavaScript
+FOLIO TODO: Talk about strict mode
 
 Use single quote instead of double quote.
+FOLIO TODO: Talk about the reason.
 
 Insert a space between if and (. e.g. if (a) instead of if(a)
 
 Insert a space between else and {. e.g. else { instead of else{
+
+FOLIO TODO: Talk about variable shadowing
+
+FOLIO TODO: Talk about jshint
+
+FOLIO TODO: Talk about type casting and why http://yiding-he.iteye.com/blog/58180 works
+
+FOLIO TODO: Talk about Idiomatic.js
