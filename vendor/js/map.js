@@ -1,3 +1,5 @@
+/*global  $:false,
+          google:false;*/
 (function () {
 "use strict";
   var geocoder,
@@ -6,12 +8,15 @@
       geocoder = new google.maps.Geocoder();
 
   function addMarker(location, title) {
-    var marker;
-    marker = new google.maps.Marker({
+    var marker,
+        markerParameter = [];
+
+    markerParameter = {
       map: map,
       position: location,
       title: title
-    });
+    }
+    marker = new google.maps.Marker(markerParameter);
     markers.push(marker);
   }
 
@@ -46,19 +51,22 @@
       zoom: zoom,
       center: new google.maps.LatLng(TAIWAN_LAT, TAIWAN_LNG)
     };
+
     mapDiv = $('#map-canvas')[0];
     map = new google.maps.Map(mapDiv, mapOptions);
 
-    $("#address").on('change',function () {
-      var i,
-          str,
-          textArr;
+    $("#address").on('change',
+      function () {
+        var i,
+            str,
+            textArr;
 
-      str = $("#address").val();
-      textArr = str.split('\n');
-      i = textArr.length;
-      goLoop(textArr, i);
-    });
+        str = $("#address").val();
+        textArr = str.split('\n');
+        i = textArr.length;
+        goLoop(textArr, i);
+      }
+    );
   }
 
   function onGeocodeGet(results, status) {
@@ -77,18 +85,24 @@
     }
   }
 
-  $('#delete').on('click', function () {
-    $('#hide').click();
-    markers = [];
-  });
+  $('#delete').on('click',
+    function () {
+      $('#hide').click();
+      markers = [];
+    }
+  );
 
-  $('#hide').on('click', function () {
-    setAllMap(null);
-  });
+  $('#hide').on('click',
+    function () {
+      setAllMap(null);
+    }
+  );
 
-  $('#show').on('click', function () {
-    setAllMap(map);
-  });
+  $('#show').on('click',
+    function () {
+      setAllMap(map);
+    }
+  );
 
   google.maps.event.addDomListener(window, 'load', initialize);
 
