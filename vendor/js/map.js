@@ -1,34 +1,39 @@
-"use strict";
+/*global  $:false,
+          google:false;*/
 (function () {
+"use strict";
   var geocoder,
       map,
       markers = [];
       geocoder = new google.maps.Geocoder();
 
   function addMarker(location, title) {
-    var marker;
-    marker = new google.maps.Marker({
+    var marker,
+        markerParameter = [];
+
+    markerParameter = {
       map: map,
       position: location,
       title: title
-    });
+    }
+    marker = new google.maps.Marker(markerParameter);
     markers.push(marker);
   }
 
-  function goLoop(TextArr, i){
+  function goLoop(textArr, i){
     i--;
     if(i < 0) {
 
-    } else if(TextArr[i].length <= 0){
-      goLoop(TextArr, i);
+    } else if(textArr[i].length <= 0){
+      goLoop(textArr, i);
     } else{
       geocoder.geocode(
-        {'address':TextArr[i]},
+        {'address':textArr[i]},
         onGeocodeGet
       );
 
       setTimeout(function () {
-        goLoop(TextArr, i)
+        goLoop(textArr, i);
       }, 1000);
 
     }
@@ -36,27 +41,32 @@
 
   function initialize() {
 
-    var mapOptions = [],
-        Taiwan_lat = 23.654587852202987,
-        Taiwan_lng = 121.014404296875,
+    var mapDiv,
+        mapOptions = [],
+        TAIWAN_LAT = 23.654587852202987,
+        TAIWAN_LNG = 121.014404296875,
         zoom = 8;
 
     mapOptions = {
       zoom: zoom,
-      center: new google.maps.LatLng(Taiwan_lat, Taiwan_lng)
+      center: new google.maps.LatLng(TAIWAN_LAT, TAIWAN_LNG)
     };
-    map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-    $("#address").on('change',function () {
-      var i,
-          str,
-          TextArr;
+    mapDiv = $('#map-canvas')[0];
+    map = new google.maps.Map(mapDiv, mapOptions);
 
-      str = $("#address").val();
-      TextArr = str.split('\n');
-      i = TextArr.length;
-      goLoop(TextArr, i);
-    });
+    $("#address").on('change',
+      function () {
+        var i,
+            str,
+            textArr;
+
+        str = $("#address").val();
+        textArr = str.split('\n');
+        i = textArr.length;
+        goLoop(textArr, i);
+      }
+    );
   }
 
   function onGeocodeGet(results, status) {
@@ -75,18 +85,24 @@
     }
   }
 
-  $('#delete').on('click', function () {
-    $('#hide').click();
-    markers = [];
-  });
+  $('#delete').on('click',
+    function () {
+      $('#hide').click();
+      markers = [];
+    }
+  );
 
-  $('#hide').on('click', function () {
-    setAllMap(null);
-  });
+  $('#hide').on('click',
+    function () {
+      setAllMap(null);
+    }
+  );
 
-  $('#show').on('click', function () {
-    setAllMap(map);
-  });
+  $('#show').on('click',
+    function () {
+      setAllMap(map);
+    }
+  );
 
   google.maps.event.addDomListener(window, 'load', initialize);
 
