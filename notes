@@ -1,33 +1,33 @@
-@- Validate HTML (是驗證哪一種呢?)
+O- Validate HTML (是驗證哪一種呢?)
 	目前丟檔案剩下這種錯誤, 可是這段式=  ' ' = 我用驗證片段br時產生的耶...
 	Error Line 6, Column 61: Bad value Content-Style-Type for attribute http-equiv on element meta.
 	<meta http-equiv="Content-Style-Type" content="text/css">
 
-X- Remove global variables e.g. map, markers
+O- Remove global variables e.g. map, markers
 
-X- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
+O- Define consts for magic numbers e.g. 23.654587852202987, 121.014404296875
 Make them all uppercase
 
-?- Call at most a function in a line ((是指??))
+O- Call at most a function in a line ((是指??))
 一行最多一個 function call
 
 O- Be consistent in using whether native JavaScript api or jQuery (一開始load實體化的部分?)
 妳本來是用 getElementById 這可以用 jQuery 做到
 
-?- Fix indentation of the callback  ((是指?? --- 完全忘記callback是甚麼ˊ ==))
+O- Fix indentation of the callback  ((是指?? --- 完全忘記callback是甚麼ˊ ==))
 callback 就是被作為 value 傳遞的 function
 
-X- Lint JavaScript with JSHint (還要再研究= ' =',怎麼結合sublime)
+O- Lint JavaScript with JSHint (還要再研究= ' =',怎麼結合sublime)
 Use http://www.jshint.com/ first until you integrate jshint to sublime.
 
-X- Fix casing of variables, e.g. TextArr
+O- Fix casing of variables, e.g. TextArr
 
 O- Sort function in alphabets (監聽事件和function的sort一樣混著排序嗎?)
 
 O- Create callback for geocoder at most once (不確定)
 You've done it.
 
-NS- Make coding style conforming to Idiomatic.js (不確定)
+O- Make coding style conforming to Idiomatic.js (不確定)
 Check out this web page: https://github.com/rwaldron/idiomatic.js/. It's just
 like PSR-2.
 
@@ -49,14 +49,17 @@ O- Create a folder, jquery, under vendor for jQuery
 O- Use "use strict" in JavaScript
 FOLIO TODO: Talk about strict mode
 
-Use double quote instead of single quote.
+O- Use double quote instead of single quote.
 
-Insert a space between if and (. e.g. if (a) instead of if(a)
+O- Insert a space between if and (. e.g. if (a) instead of if(a)
 
-Insert a space between else and {. e.g. else { instead of else{
+O- Insert a space between else and {. e.g. else { instead of else{
 
 FOLIO TODO: Talk about jshint
 
 FOLIO TODO: Talk about Idiomatic.js
 
 FOLIO TODO: Talk about this
+
+
+QUESTION : SETTIMEOUT要怎麼排才會比較漂亮壓 0-0 ...`49 ~ 51行那兒

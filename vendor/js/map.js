@@ -3,107 +3,133 @@
 (function () {
 "use strict";
   var geocoder,
-      map,
-      markers = [];
+      googleMap;
+
       geocoder = new google.maps.Geocoder();
+      googleMap = new GoogleMap();
 
-  function addMarker(location, title) {
-    var marker,
-        markerParameter = [];
+  function GoogleMap() {
+    var _map,
+        _markers = [];
 
-    markerParameter = {
-      map: map,
-      position: location,
-      title: title
-    }
-    marker = new google.maps.Marker(markerParameter);
-    markers.push(marker);
-  }
+    this.addMarker = function(location, title) {
+      var marker,
+          markerParameter = [];
 
-  function goLoop(textArr, i){
-    i--;
-    if(i < 0) {
+      markerParameter = {
+        map: _map,
+        position: location,
+        title: title
+      };
 
-    } else if(textArr[i].length <= 0){
-      goLoop(textArr, i);
-    } else{
-      geocoder.geocode(
-        {'address':textArr[i]},
-        onGeocodeGet
-      );
+      marker = new google.maps.Marker(markerParameter);
+      _markers.push(marker);
+    };
 
-      setTimeout(function () {
-        goLoop(textArr, i);
-      }, 1000);
+    this.getMap = function () {
+      return _map;
+    };
 
-    }
-  }
+    this.getMarkers = function () {
+      return _markers;
+    };
 
-  function initialize() {
+    this.goLoop = function(textArr, i){
+      i--;
+      if (i < 0) {
 
-    var mapDiv,
+      } else if (textArr[i].length <= 0){
+        googleMap.goLoop(textArr, i);
+      } else {
+        geocoder.geocode(
+          {"address":textArr[i]},
+          googleMap.onGeocodeGet
+        );
+
+        setTimeout(function () {
+          googleMap.goLoop(textArr, i);
+        }, 1000);
+      }
+    };
+
+    this.initialize = function() {
+      var mapDiv,
         mapOptions = [],
         TAIWAN_LAT = 23.654587852202987,
         TAIWAN_LNG = 121.014404296875,
         zoom = 8;
 
-    mapOptions = {
-      zoom: zoom,
-      center: new google.maps.LatLng(TAIWAN_LAT, TAIWAN_LNG)
+        mapOptions = {
+          zoom: zoom,
+          center: new google.maps.LatLng(TAIWAN_LAT, TAIWAN_LNG)
+        };
+
+        mapDiv = $("#map-canvas")[0];
+        _map = new google.maps.Map(mapDiv, mapOptions);
+
+        $("#address").on("change",
+          function () {
+            var i,
+                str,
+                textArr;
+
+            str = $("#address").val();
+            textArr = str.split("\n");
+            i = textArr.length;
+            googleMap.goLoop(textArr, i);
+          }
+        );
     };
 
-    mapDiv = $('#map-canvas')[0];
-    map = new google.maps.Map(mapDiv, mapOptions);
-
-    $("#address").on('change',
-      function () {
-        var i,
-            str,
-            textArr;
-
-        str = $("#address").val();
-        textArr = str.split('\n');
-        i = textArr.length;
-        goLoop(textArr, i);
+    this.onGeocodeGet = function(results, status) {
+      var address,
+          LatLng;
+      if (status == google.maps.GeocoderStatus.OK) {
+        address = results[0].formatted_address;
+        LatLng = results[0].geometry.location;
+        _map.setCenter(LatLng);  //將地圖中心定位到查詢結果
+        googleMap.addMarker(LatLng, address);
       }
-    );
+    };
+
+    this.setAllMap = function(factor) {
+      var i = 0;
+      for (i; i < _markers.length; i++) {
+        _markers[i].setMap(factor);
+      }
+    };
+
+    this.setMapValue = function (factor) {
+      _map = factor;
+    };
+
+    this.setMarkers = function (factor) {
+      _markers = factor;
+    };
+
   }
 
-  function onGeocodeGet(results, status) {
-    var LatLng;
-    if(status == google.maps.GeocoderStatus.OK) {
-      LatLng = results[0].geometry.location;
-      map.setCenter(LatLng);  //將地圖中心定位到查詢結果
-      addMarker(LatLng, results[0].formatted_address);
-    }
-  }
-
-  function setAllMap(map) {
-    var i = 0;
-    for (i; i < markers.length; i++) {
-      markers[i].setMap(map);
-    }
-  }
-
-  $('#delete').on('click',
+  $("#delete").on("click",
     function () {
-      $('#hide').click();
-      markers = [];
+      googleMap.setAllMap(null)
+              .setMarkers([]);
     }
   );
 
-  $('#hide').on('click',
+  $("#hide").on("click",
     function () {
-      setAllMap(null);
+      googleMap.setAllMap(null);
     }
   );
 
-  $('#show').on('click',
+  $("#show").on("click",
     function () {
-      setAllMap(map);
+      var map;
+      map = googleMap.getMap();
+      googleMap.setAllMap(map);
     }
   );
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+  google.maps.event.addDomListener(window, "load", googleMap.initialize);
 
 })();
