@@ -1,9 +1,9 @@
 /*global  $:false,
           google:false;*/
-(function () {
-"use strict";
-  var googleMap;
-      googleMap = new GoogleMap();
+(function(global, undefined) {
+  "use strict";
+
+  global.GoogleMap = GoogleMap;
 
   function GoogleMap() {
     this._geocoder = new google.maps.Geocoder();
@@ -89,6 +89,12 @@
       googleMap._markers[i].setMap(factor);
     }
   };
+})(this);
+
+(function () {
+"use strict";
+  var googleMap;
+      googleMap = new GoogleMap();
 
   $("#delete").on("click",
     function () {
