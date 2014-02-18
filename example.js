@@ -142,3 +142,11 @@ Array.prototype.slice === [].slice;
 (function(){return arguments.slice})();
 [1, 2, 3].slice();
 (function(){return [].slice.call(arguments)})();
+
+// bind2
+Function.prototype.bind2 = function(context) {
+  var f = this;
+  return function() {
+	  f.apply(context, arguments);
+  };
+};
