@@ -5,10 +5,20 @@
 
   global.GoogleMap = GoogleMap;
 
+  Function.prototype.bind2 = function(context) {
+    var f = this;
+    return function() {
+      f.apply(context,arguments);
+    };
+  };
+
   function GoogleMap() {
     this._geocoder = new google.maps.Geocoder();
     this._map = null;
     this._markers = [];
+    this.goLoop = GoogleMap.prototype.goLoop.bind2(this);
+    this.initialize = GoogleMap.prototype.initialize.bind2(this);
+    this.onGeocodeGet = GoogleMap.prototype.onGeocodeGet.bind2(this);
   }
 
   GoogleMap.prototype.addMarker = function(location, title) {
@@ -16,29 +26,29 @@
         markerParameter = [];
 
     markerParameter = {
-      map: googleMap._map,
+      map: this._map,
       position: location,
       title: title
     };
 
     marker = new google.maps.Marker(markerParameter);
-    googleMap._markers.push(marker);
+    this._markers.push(marker);
   };
 
   GoogleMap.prototype.goLoop = function(textArr, i){
+
     i--;
     if (i < 0) {
 
     } else if (textArr[i].length <= 0){
-      googleMap.goLoop(textArr, i);
+      this.goLoop(textArr, i);
     } else {
-      googleMap._geocoder.geocode(
+      this._geocoder.geocode(
         {"address":textArr[i]},
-        googleMap.onGeocodeGet
+        this.onGeocodeGet
       );
-
       setTimeout(function () {
-        googleMap.goLoop(textArr, i);
+        this.GoogleMap.goLoop(textArr, i);
       }, 1000);
     }
   };
@@ -56,20 +66,9 @@
       };
 
       mapDiv = $("#map-canvas")[0];
-      googleMap._map = new google.maps.Map(mapDiv, mapOptions);
+      this._map = new google.maps.Map(mapDiv, mapOptions);
 
-      $("#address").on("change",
-        function () {
-          var i,
-              str,
-              textArr;
 
-          str = $("#address").val();
-          textArr = str.split("\n");
-          i = textArr.length;
-          googleMap.goLoop(textArr, i);
-        }
-      );
   };
 
   GoogleMap.prototype.onGeocodeGet = function(results, status) {
@@ -78,23 +77,37 @@
     if (status == google.maps.GeocoderStatus.OK) {
       address = results[0].formatted_address;
       LatLng = results[0].geometry.location;
-      googleMap._map.setCenter(LatLng);  //將地圖中心定位到查詢結果
-      googleMap.addMarker(LatLng, address);
+      this._map.setCenter(LatLng);  //將地圖中心定位到查詢結果
+      this.addMarker(LatLng, address);
     }
   };
 
   GoogleMap.prototype.setAllMap = function(factor) {
     var i = 0;
     for (i; i < googleMap._markers.length; i++) {
-      googleMap._markers[i].setMap(factor);
+      this._markers[i].setMap(factor);
     }
   };
+
 })(this);
 
 (function () {
 "use strict";
   var googleMap;
       googleMap = new GoogleMap();
+
+  $("#address").on("change",
+      function () {
+        var i,
+            str,
+            textArr;
+
+        str = $("#address").val();
+        textArr = str.split("\n");
+        i = textArr.length;
+        googleMap.goLoop(textArr, i);
+      }
+    );
 
   $("#delete").on("click",
     function () {
