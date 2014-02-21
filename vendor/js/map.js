@@ -38,6 +38,12 @@
   GoogleMap.prototype.goLoop = function(textArr, i){
 
     i--;
+    var tempF = onTimeout.bind2(this);
+    function onTimeout()
+    {
+      this.goLoop(textArr, i);
+    }
+
     if (i < 0) {
 
     } else if (textArr[i].length <= 0){
@@ -47,9 +53,7 @@
         {"address":textArr[i]},
         this.onGeocodeGet
       );
-      setTimeout(function () {
-        this.GoogleMap.goLoop(textArr, i);
-      }, 1000);
+      setTimeout(tempF, 1000);
     }
   };
 
