@@ -35,7 +35,7 @@ O- Include jQuery locally (可是之前folio你說的判斷網頁有沒有仔入
 Work it out, this can be a challenge for you.
 
 O- Show more than 11 addresses at a time
-FOLIO TODO: Talk about deferred.
+O- FOLIO TODO: Talk about deferred.
 
 -----------------------------------------------------------------------
 這段都忘記了 T______________T。好像是概念,有要修改嗎...
@@ -59,9 +59,9 @@ FOLIO TODO: Talk about jshint
 
 FOLIO TODO: Talk about Idiomatic.js
 
-FOLIO TODO: Talk about this, apply, call
+O- FOLIO TODO: Talk about this, apply, call
 
-FOLIO TODO: Talk about arguments
+O- FOLIO TODO: Talk about arguments
 
 
 QUESTION : SETTIMEOUT要怎麼排才會比較漂亮壓 0-0 ...`49 ~ 51行那兒
