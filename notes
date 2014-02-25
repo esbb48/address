@@ -65,3 +65,4 @@ FOLIO TODO: Talk about arguments
 
 
 QUESTION : SETTIMEOUT要怎麼排才會比較漂亮壓 0-0 ...`49 ~ 51行那兒
+搬去 prototype 就可以了
