@@ -16,9 +16,10 @@
     this._geocoder = new google.maps.Geocoder();
     this._map = null;
     this._markers = [];
-    this.goLoop = GoogleMap.prototype.goLoop.bind2(this);
-    this.initialize = GoogleMap.prototype.initialize.bind2(this);
-    this.onGeocodeGet = GoogleMap.prototype.onGeocodeGet.bind2(this);
+    this.goLoop = this.goLoop.bind2(this);
+    this.initialize = this.initialize.bind2(this);
+    this.onGeocodeGet = this.onGeocodeGet.bind2(this);
+    this.onTimeout = this.onTimeout.bind2(this);
   }
 
   GoogleMap.prototype.addMarker = function(location, title) {
@@ -36,14 +37,8 @@
   };
 
   GoogleMap.prototype.goLoop = function(textArr, i){
-
     i--;
-    var tempF = onTimeout.bind2(this);
-    function onTimeout()
-    {
-      this.goLoop(textArr, i);
-    }
-
+    var tempF = this.onTimeout.bind2(this);
     if (i < 0) {
 
     } else if (textArr[i].length <= 0){
@@ -53,7 +48,7 @@
         {"address":textArr[i]},
         this.onGeocodeGet
       );
-      setTimeout(tempF, 1000);
+      setTimeout(tempF(textArr, i), 1000);
     }
   };
 
@@ -84,6 +79,10 @@
       this._map.setCenter(LatLng);  //將地圖中心定位到查詢結果
       this.addMarker(LatLng, address);
     }
+  };
+
+  GoogleMap.prototype.onTimeout = function(textArr, i) {
+    this.goLoop(textArr, i);
   };
 
   GoogleMap.prototype.setAllMap = function(factor) {
