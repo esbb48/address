@@ -7,6 +7,7 @@
 
   global.GoogleMap = GoogleMap;
 
+  // TODO Introduce es5-shim
   Function.prototype.bind2 = function(context) {
     var f = this;
     return function() {
@@ -15,6 +16,7 @@
   };
 
   function GoogleMap() {
+    // TODO Introduce dependency injection
     this._geocoder = new google.maps.Geocoder();
     this._map = null;
     this._markers = [];
@@ -23,6 +25,8 @@
     this.onGeocodeGet = this.onGeocodeGet.bind2(this);
     this.onTimeout = this.onTimeout.bind2(this);
   }
+
+  // TODO Introduce property in prototype
 
   GoogleMap.prototype.addMarker = function(location, title) {
     var marker,
@@ -39,8 +43,10 @@
   };
 
   GoogleMap.prototype.goLoop = function(textArr, i){
+    // TODO var is the first statement
     i--;
     var tempF = this.onTimeout.bind2(this);
+
     if (i < 0) {
 
     } else if (textArr[i].length <= 0){
