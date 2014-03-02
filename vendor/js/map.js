@@ -1,5 +1,7 @@
-/*global  $:false,
-          google:false;*/
+/*global $:false, google:false */
+/*jshint camelcase:true, curly:true, eqeqeq:true, freeze:true, immed:true,
+ indent:2, newcap:true, noarg:true, noempty:true, nonew:true, quotmark:double,
+ undef:true, unused:true, strict:true, trailing:true */
 (function(global, undefined) {
   "use strict";
 
