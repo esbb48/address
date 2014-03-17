@@ -28,24 +28,49 @@
     //     });
 
     function doneFilter(){
-        alert("done");
+        //alert("done");
+		return $.Deferred();
+		//return $.Deferred.Deferred();
     }
 
     function failFilter(){
-        alert("fail");
+        //alert("fail");
+		return $.Deferred();
     }
 
     function progressFilter(){
-        alert("progress");
+        //alert("progress");
+		return $.Deferred();
     }
 
     function then(deferred, doneFilter, failFilter, progressFilter) {
-        var tempDeferred;
-        tempDeferred = deferred.done(doneFilter)
-                        .fail(failFilter)
-                        .progress(progressFilter);
+        var NewDeferred = $.Deferred();
+		var tempDeferred,
+			tempState;
 
-        return tempDeferred;
+		//deferred.done(doneFilter)
+          //      .fail(failFilter)
+            //    .progress(progressFilter);
+
+		var state = deferred.state();
+		if(state == "resolved") {
+			tempDeferred == doneFilter();
+		} elseif (state == "rejected") {
+			tempDeferred == failFilter();
+		} elseif (state == "pending"){
+			tempDeferred == progressFilter();
+		}
+
+		tempState = tempDeferred.state();
+		if(tempState == "resolved") {
+			NewDeferred.resolve();
+		} elseif (state == "rejected") {
+			NewDeferred.reject();
+		} elseif (state == "pending"){
+			NewDeferred.notify();
+		}
+
+        return NewDeferred;
     }
 
       var head;
