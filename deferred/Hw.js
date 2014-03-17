@@ -28,57 +28,44 @@
     //     });
 
     function doneFilter(){
-        //alert("done");
 		return $.Deferred();
-		//return $.Deferred.Deferred();
     }
 
     function failFilter(){
-        //alert("fail");
-		return $.Deferred();
+		return  $.Deferred();
     }
 
     function progressFilter(){
-        //alert("progress");
 		return $.Deferred();
     }
 
     function then(deferred, doneFilter, failFilter, progressFilter) {
-        var NewDeferred = $.Deferred();
-		var tempDeferred,
-			tempState;
+        var NewDefferred,
+            State;
+		deferred.done(doneFilter)
+                .fail(failFilter)
+                .progress(progressFilter);
+        State = deferred.state();
 
-		//deferred.done(doneFilter)
-          //      .fail(failFilter)
-            //    .progress(progressFilter);
-
-		var state = deferred.state();
-		if(state == "resolved") {
-			tempDeferred == doneFilter();
-		} elseif (state == "rejected") {
-			tempDeferred == failFilter();
-		} elseif (state == "pending"){
-			tempDeferred == progressFilter();
-		}
-
-		tempState = tempDeferred.state();
-		if(tempState == "resolved") {
-			NewDeferred.resolve();
-		} elseif (state == "rejected") {
-			NewDeferred.reject();
-		} elseif (state == "pending"){
-			NewDeferred.notify();
-		}
-
-        return NewDeferred;
+        if(State == "resolved") {
+            temp = doneFilter();
+        } else if (State == "rejected") {
+            temp = failFilter();
+        } else if (State == "pending"){
+            temp = progressFilter();
+        }
+        NewDefferred = temp.done(function(){});
+        return NewDefferred;
     }
 
-      var head;
+    var head,
+        t,
+        temp;
 
-      // head = jQuery.Deferred().resolve();
-      head = jQuery.Deferred().reject();
-      head = then(head, doneFilter, failFilter, progressFilter);
-      head = then(head, doneFilter, failFilter, progressFilter);
-      head = then(head, doneFilter, failFilter, progressFilter);
+    head = $.Deferred();
+    t = then(head, doneFilter, failFilter, progressFilter);
+    debugger;
+    // head = then(head, doneFilter, failFilter, progressFilter);
+    // head = then(head, doneFilter, failFilter, progressFilter);
 
 })(this);
